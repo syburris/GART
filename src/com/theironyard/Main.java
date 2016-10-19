@@ -143,7 +143,7 @@ public class Main {
                     Session session = request.session();
                     session.invalidate();
                     response.redirect("/");
-                    return null;
+                    return "logged out";
                 }
         );
     }
