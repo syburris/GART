@@ -114,20 +114,22 @@ public class Main {
         Spark.post(
                 "/login",
                 (request, response) -> {
-                    String email = request.queryParams("username");
-                    String password = request.queryParams("password");
-                    User user = selectUser(conn, email);
-                    if (user == null) {
-                        insertUser(conn, email, password);
+                    String body = request.body();
+                    JsonParser parser = new JsonParser();
+                    User user = parser.parse(body,User.class);
+                    User userFromDB = selectUser(conn,user.email);
+                    if (userFromDB == null) {
+                        insertUser(conn, user.email, user.password);
+                        userFromDB = selectUser(conn,user.email);
                     }
-                    else if (!password.equals(user.password)) {
+                    else if (!user.password.equals(userFromDB.password)) {
                         Spark.halt(403);
                         return null;
                     }
                     Session session = request.session();
-                    session.attribute("username", email);
-                    response.redirect("/");
-                    return "LOGIN";
+                    session.attribute("username", user.email);
+                    JsonSerializer serializer = new JsonSerializer();
+                    return serializer.serialize(userFromDB);
                 }
         );
 
