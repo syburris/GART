@@ -74,7 +74,10 @@ public class MainTest {
         Connection conn = startConnection();
         Main.insertUser(conn, "Alice", "pass");
         Main.insertUser(conn, "Bob", "123");
-        User user = Main.selectUser(conn, "Alice");
+        Main.deleteUser(conn,1);
+        ArrayList<User> users = Main.selectUsers(conn);
+        conn.close();
+        assertTrue(users.size() == 1);
     }
 
 
