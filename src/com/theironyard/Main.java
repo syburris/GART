@@ -13,7 +13,7 @@ public class Main {
 
     public static void createTables (Connection conn) throws SQLException {
         Statement stmt = conn.createStatement();
-        stmt.execute("CREATE TABLE IF NOT EXISTS users (id IDENTITY, name VARCHAR, password VARCHAR)");
+        stmt.execute("CREATE TABLE IF NOT EXISTS users (id IDENTITY, email VARCHAR, password VARCHAR)");
         stmt.execute("CREATE TABLE IF NOT EXISTS galleries (id IDENTITY, gallery VARCHAR, " +
                 "artist VARCHAR, genre VARCHAR, time VARCHAR, user_id INT)");
     }
@@ -25,13 +25,13 @@ public class Main {
         stmt.execute();
     }
 
-    public static User selectUser(Connection conn, String name) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE name = ?");
-        stmt.setString(1, name);
+    public static User selectUser(Connection conn, String email) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE email = ?");
+        stmt.setString(1, email);
         ResultSet results = stmt.executeQuery();
         if (results.next()) {
             int id = results.getInt("id");
-            return new User(id, name);
+            return new User(id, email);
         }
         return null;
     }
@@ -42,7 +42,7 @@ public class Main {
         ResultSet results = stmt.executeQuery();
         while (results.next()) {
             int id = results.getInt("id");
-            String name = results.getString("name");
+            String name = results.getString("email");
             String password = results.getString("password");
             User user = new User(id,name,password);
             users.add(user);
@@ -114,18 +114,18 @@ public class Main {
         Spark.post(
                 "/login",
                 (request, response) -> {
-                    String name = request.queryParams("username");
+                    String email = request.queryParams("username");
                     String password = request.queryParams("password");
-                    User user = selectUser(conn, name);
+                    User user = selectUser(conn, email);
                     if (user == null) {
-                        insertUser(conn, name, password);
+                        insertUser(conn, email, password);
                     }
                     else if (!password.equals(user.password)) {
                         Spark.halt(403);
                         return null;
                     }
                     Session session = request.session();
-                    session.attribute("username", name);
+                    session.attribute("username", email);
                     response.redirect("/");
                     return "LOGIN";
                 }
@@ -135,11 +135,11 @@ public class Main {
                 "/user",
                 (request, response) -> {
                     Session session = request.session();
-                    String name = session.attribute("username");
-                    if (name == null) {
+                    String email = session.attribute("username");
+                    if (email == null) {
                         return "";
                     }
-                    User user = selectUser(conn, name);
+                    User user = selectUser(conn, email);
                     JsonSerializer serializer = new JsonSerializer();
                     return serializer.serialize(user);
                 }
@@ -149,11 +149,11 @@ public class Main {
                 "/gallery",
                 (request, response) -> {
                     Session session = request.session();
-                    String name = session.attribute("username");
-                    if (name == null) {
+                    String email = session.attribute("username");
+                    if (email == null) {
                         return "";
                     }
-                    User user = selectUser(conn, name);
+                    User user = selectUser(conn, email);
                     String body = request.body();
                     JsonParser parser = new JsonParser();
                     Gallery gallery = parser.parse(body, Gallery.class);
@@ -166,8 +166,8 @@ public class Main {
                 "/gallery",
                 (request, response) -> {
                     Session session = request.session();
-                    String name = session.attribute("username");
-                    if (name == null) {
+                    String email = session.attribute("username");
+                    if (email == null) {
                         return "";
                     }
                     ArrayList<Gallery> galleries = selectGalleries(conn);
@@ -181,11 +181,11 @@ public class Main {
                 "/gallery",
                 (request, response) -> {
                     Session session = request.session();
-                    String name = session.attribute("username");
-                    if (name == null) {
+                    String email = session.attribute("username");
+                    if (email == null) {
                         return "";
                     }
-                    User user = selectUser(conn, name);
+                    User user = selectUser(conn, email);
                     String body = request.body();
                     JsonParser parser = new JsonParser();
                     Gallery gallery = parser.parse(body, Gallery.class);
