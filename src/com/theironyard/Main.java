@@ -52,7 +52,7 @@ public class Main {
                     Session session = request.session();
                     session.attribute("username", name);
                     response.redirect("/");
-                    return null;
+                    return "LOGIN";
                 }
         );
 
