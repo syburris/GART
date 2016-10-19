@@ -4,8 +4,7 @@ package com.theironyard;
  * Created by stevenburris on 10/19/16.
  */
 
-//stmt.execute("CREATE TABLE IF NOT EXISTS galleries (id IDENTITY, gallery VARCHAR, " +
-//                "artist VARCHAR, genre VARCHAR, time VARCHAR, user_id INT)");
+
 public class Gallery {
     int id;
     String galleryName;

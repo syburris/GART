@@ -8,6 +8,7 @@ import spark.Spark;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.jar.Pack200;
 
 public class Main {
 
@@ -64,6 +65,24 @@ public class Main {
         return galleries;
     }
 
+    public static Gallery updateGallery(Connection conn, Gallery gallery) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("UPDATE galleries SET gallery = ?, artist = ?, genre = ?, time = ?" +
+                " user_id = ? WHERE id = ?");
+        stmt.setString(1,gallery.galleryName);
+        stmt.setString(2,gallery.artist);
+        stmt.setString(3, gallery.genre);
+        stmt.setString(4,gallery.time);
+        stmt.setInt(5,gallery.userId);
+        stmt.execute();
+        return new Gallery(gallery.galleryName, gallery.artist, gallery.genre, gallery.time, gallery.userId);
+    }
+
+    public static void deleteUser(Connection conn, int id) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM users WHERE id = ?");
+        stmt.setInt(1,id);
+        stmt.execute();
+    }
+
 
     public static void main(String[] args) throws SQLException {
         Server.createWebServer().start();
@@ -107,7 +126,7 @@ public class Main {
         );
 
         Spark.post(
-                "gallery",
+                "/gallery",
                 (request, response) -> {
                     Session session = request.session();
                     String name = session.attribute("username");
@@ -117,14 +136,14 @@ public class Main {
                     User user = selectUser(conn, name);
                     String body = request.body();
                     JsonParser parser = new JsonParser();
-                    Gallery gallery = parser.parse(body);
+                    Gallery gallery = parser.parse(body, Gallery.class);
                     insertGallery(conn,gallery,user);
                     return "Gallery has been added.";
                 }
         );
 
         Spark.get(
-                "gallery",
+                "/gallery",
                 (request, response) -> {
                     Session session = request.session();
                     String name = session.attribute("username");
@@ -138,14 +157,42 @@ public class Main {
                 }
         );
 
+        Spark.put(
+                "/gallery",
+                (request, response) -> {
+                    Session session = request.session();
+                    String name = session.attribute("username");
+                    if (name == null) {
+                        return "";
+                    }
+                    User user = selectUser(conn, name);
+                    String body = request.body();
+                    JsonParser parser = new JsonParser();
+                    Gallery gallery = parser.parse(body, Gallery.class);
+                    updateGallery(conn, gallery);
+                    return "Gallery has been updated.";
+                }
+        );
+
+        Spark.delete(
+                "/user/:id",
+                (request, response) -> {
+                    JsonParser parser = new JsonParser();
+                    int id = parser.parse(request.params(":id"));
+                    deleteUser(conn, id);
+                    return "User deleted.";
+                }
+        );
+
         Spark.post(
                 "/logout",
                 (request, response) -> {
                     Session session = request.session();
                     session.invalidate();
                     response.redirect("/");
-                    return "logged out";
+                    return "User has logged out.";
                 }
         );
+
     }
 }
