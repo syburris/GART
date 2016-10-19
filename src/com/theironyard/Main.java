@@ -171,10 +171,8 @@ public class Main {
                     if (email == null) {
                         return "";
                     }
-                    ArrayList<Gallery> galleries = selectGalleries(conn);
                     JsonSerializer serializer = new JsonSerializer();
-                    GalleryWrapper wrapper = new GalleryWrapper(galleries);
-                    return serializer.deep(true).serialize(wrapper);
+                    return serializer.serialize(selectGalleries(conn));
                 }
         );
 
