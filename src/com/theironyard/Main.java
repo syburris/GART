@@ -222,7 +222,6 @@ public class Main {
                 (request, response) -> {
                     Session session = request.session();
                     session.invalidate();
-                    response.redirect("/");
                     return "User has logged out.";
                 }
         );
