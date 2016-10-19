@@ -58,7 +58,6 @@ public class Main {
         stmt.setString(4, gallery.time);
         stmt.setInt(5, user.id);
         stmt.execute();
-
     }
 
     static ArrayList<Gallery> selectGalleries(Connection conn) throws SQLException {
