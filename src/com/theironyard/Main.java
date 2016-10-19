@@ -1,5 +1,6 @@
 package com.theironyard;
 
+import jodd.json.JsonSerializer;
 import spark.Session;
 import spark.Spark;
 
@@ -52,6 +53,20 @@ public class Main {
                     session.attribute("username", name);
                     response.redirect("/");
                     return null;
+                }
+        );
+
+        Spark.get(
+                "/user",
+                (request, response) -> {
+                    Session session = request.session();
+                    String name = session.attribute("username");
+                    if (name == null) {
+                        return "";
+                    }
+                    User user = selectUser(conn, name);
+                    JsonSerializer serializer = new JsonSerializer();
+                    return serializer.serialize(user);
                 }
         );
     }
