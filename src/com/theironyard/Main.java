@@ -191,8 +191,9 @@ public class Main {
                     String body = request.body();
                     JsonParser parser = new JsonParser();
                     Gallery gallery = parser.parse(body, Gallery.class);
-                    updateGallery(conn, gallery);
-                    return "Gallery has been updated.";
+                    Gallery updatedGallery = updateGallery(conn, gallery);
+                    JsonSerializer serializer = new JsonSerializer();
+                    return serializer.serialize(updatedGallery);
                 }
         );
 
