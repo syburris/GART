@@ -2,6 +2,7 @@ package com.theironyard;
 
 import jodd.json.JsonParser;
 import jodd.json.JsonSerializer;
+import org.h2.tools.Server;
 import spark.Session;
 import spark.Spark;
 
@@ -56,16 +57,16 @@ public class Main {
             String artist = results.getString("galleries.artist");
             String genre = results.getString("galleries.genre");
             String time = results.getString("galleries.time");
-            int userId = results.getInt("users.email");
+            int userId = results.getInt("users.id");
             Gallery gallery = new Gallery(id,galleryName,artist,genre,time,userId);
             galleries.add(gallery);
-
         }
         return galleries;
     }
 
 
     public static void main(String[] args) throws SQLException {
+        Server.createWebServer().start();
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
         createTables(conn);
         Spark.externalStaticFileLocation("public");
