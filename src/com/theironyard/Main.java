@@ -8,7 +8,6 @@ import spark.Spark;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.jar.Pack200;
 
 public class Main {
 
@@ -35,6 +34,20 @@ public class Main {
             return new User(id, name);
         }
         return null;
+    }
+
+    public static ArrayList<User> selectUsers(Connection conn) throws SQLException {
+        ArrayList<User> users = new ArrayList<>();
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users");
+        ResultSet results = stmt.executeQuery();
+        while (results.next()) {
+            int id = results.getInt("id");
+            String name = results.getString("name");
+            String password = results.getString("password");
+            User user = new User(id,name,password);
+            users.add(user);
+        }
+        return users;
     }
 
     public static void insertGallery(Connection conn, Gallery gallery, User user) throws SQLException {
@@ -66,15 +79,22 @@ public class Main {
     }
 
     public static Gallery updateGallery(Connection conn, Gallery gallery) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("UPDATE galleries SET gallery = ?, artist = ?, genre = ?, time = ?" +
+        PreparedStatement stmt = conn.prepareStatement("UPDATE galleries SET gallery = ?, artist = ?, genre = ?, time = ?," +
                 " user_id = ? WHERE id = ?");
         stmt.setString(1,gallery.galleryName);
         stmt.setString(2,gallery.artist);
         stmt.setString(3, gallery.genre);
         stmt.setString(4,gallery.time);
         stmt.setInt(5,gallery.userId);
+        stmt.setInt(6,gallery.id);
         stmt.execute();
-        return new Gallery(gallery.galleryName, gallery.artist, gallery.genre, gallery.time, gallery.userId);
+        return new Gallery(gallery.id,gallery.galleryName, gallery.artist, gallery.genre, gallery.time, gallery.userId);
+    }
+
+    public static void deleteGallery(Connection conn, int id) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM galleries WHERE id = ?");
+        stmt.setInt(1,id);
+        stmt.execute();
     }
 
     public static void deleteUser(Connection conn, int id) throws SQLException {
@@ -171,6 +191,16 @@ public class Main {
                     Gallery gallery = parser.parse(body, Gallery.class);
                     updateGallery(conn, gallery);
                     return "Gallery has been updated.";
+                }
+        );
+
+        Spark.delete(
+                "/gallery/:id",
+                (request, response) -> {
+                    JsonParser parser = new JsonParser();
+                    int id = parser.parse(request.params(":id"));
+                    deleteGallery(conn,id);
+                    return "Gallery deleted.";
                 }
         );
 

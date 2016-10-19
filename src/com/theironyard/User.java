@@ -5,25 +5,25 @@ package com.theironyard;
  */
 public class User {
     int id;
-    String email;
+    String name;
     String password;
 
     public User() {
     }
 
-    public User(int id, String email) {
+    public User(int id, String name) {
         this.id = id;
-        this.email = email;
+        this.name = name;
     }
 
-    public User(int id, String email, String password) {
+    public User(int id, String name, String password) {
         this.id = id;
-        this.email = email;
+        this.name = name;
         this.password = password;
     }
 
-    public User(String email, String password) {
-        this.email = email;
+    public User(String name, String password) {
+        this.name = name;
         this.password = password;
     }
 
@@ -35,12 +35,12 @@ public class User {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getName() {
+        return name;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {
