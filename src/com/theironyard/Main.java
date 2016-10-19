@@ -1,10 +1,12 @@
 package com.theironyard;
 
+import jodd.json.JsonParser;
 import jodd.json.JsonSerializer;
 import spark.Session;
 import spark.Spark;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -31,6 +33,35 @@ public class Main {
             return new User(id, name);
         }
         return null;
+    }
+
+    public static void insertGallery(Connection conn, Gallery gallery, User user) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO galleries VALUES (NULL, ?, ?, ?, ?, ?)");
+        stmt.setString(1, gallery.galleryName);
+        stmt.setString(2, gallery.artist);
+        stmt.setString(3, gallery.genre);
+        stmt.setString(4, gallery.time);
+        stmt.setInt(5, user.id);
+        stmt.execute();
+
+    }
+
+    static ArrayList<Gallery> selectGalleries(Connection conn) throws SQLException {
+        ArrayList<Gallery> galleries = new ArrayList<>();
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM galleries INNER JOIN users ON galleries.user_id = users.id");
+        ResultSet results = stmt.executeQuery();
+        while (results.next()) {
+            int id = results.getInt("galleries.id");
+            String galleryName = results.getString("galleries.gallery");
+            String artist = results.getString("galleries.artist");
+            String genre = results.getString("galleries.genre");
+            String time = results.getString("galleries.time");
+            int userId = results.getInt("users.email");
+            Gallery gallery = new Gallery(id,galleryName,artist,genre,time,userId);
+            galleries.add(gallery);
+
+        }
+        return galleries;
     }
 
 
@@ -71,6 +102,48 @@ public class Main {
                     User user = selectUser(conn, name);
                     JsonSerializer serializer = new JsonSerializer();
                     return serializer.serialize(user);
+                }
+        );
+
+        Spark.post(
+                "gallery",
+                (request, response) -> {
+                    Session session = request.session();
+                    String name = session.attribute("username");
+                    if (name == null) {
+                        return "";
+                    }
+                    User user = selectUser(conn, name);
+                    String body = request.body();
+                    JsonParser parser = new JsonParser();
+                    Gallery gallery = parser.parse(body);
+                    insertGallery(conn,gallery,user);
+                    return "Gallery has been added.";
+                }
+        );
+
+        Spark.get(
+                "gallery",
+                (request, response) -> {
+                    Session session = request.session();
+                    String name = session.attribute("username");
+                    if (name == null) {
+                        return "";
+                    }
+                    ArrayList<Gallery> galleries = selectGalleries(conn);
+                    JsonSerializer serializer = new JsonSerializer();
+                    GalleryWrapper wrapper = new GalleryWrapper(galleries);
+                    return serializer.deep(true).serialize(wrapper);
+                }
+        );
+
+        Spark.post(
+                "/logout",
+                (request, response) -> {
+                    Session session = request.session();
+                    session.invalidate();
+                    response.redirect("/");
+                    return null;
                 }
         );
     }

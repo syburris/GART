@@ -34,6 +34,14 @@ public class Gallery {
         this.userId = userId;
     }
 
+    public Gallery(int id, String galleryName, String artist, String genre, String time) {
+        this.id = id;
+        this.galleryName = galleryName;
+        this.artist = artist;
+        this.genre = genre;
+        this.time = time;
+    }
+
     public int getId() {
         return id;
     }
