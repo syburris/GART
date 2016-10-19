@@ -77,14 +77,14 @@ public class Main {
         return galleries;
     }
 
-    public static Gallery updateGallery(Connection conn, Gallery gallery) throws SQLException {
+    public static Gallery updateGallery(Connection conn, Gallery gallery, User user) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("UPDATE galleries SET gallery = ?, artist = ?, genre = ?, time = ?," +
                 " user_id = ? WHERE id = ?");
         stmt.setString(1,gallery.galleryName);
         stmt.setString(2,gallery.artist);
         stmt.setString(3, gallery.genre);
         stmt.setString(4,gallery.time);
-        stmt.setInt(5,gallery.userId);
+        stmt.setInt(5,user.id);
         stmt.setInt(6,gallery.id);
         stmt.execute();
         return new Gallery(gallery.id,gallery.galleryName, gallery.artist, gallery.genre, gallery.time, gallery.userId);
@@ -190,7 +190,7 @@ public class Main {
                     String body = request.body();
                     JsonParser parser = new JsonParser();
                     Gallery gallery = parser.parse(body, Gallery.class);
-                    Gallery updatedGallery = updateGallery(conn, gallery);
+                    Gallery updatedGallery = updateGallery(conn, gallery, user);
                     JsonSerializer serializer = new JsonSerializer();
                     return serializer.serialize(updatedGallery);
                 }
