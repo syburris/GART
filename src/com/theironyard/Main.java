@@ -49,6 +49,10 @@ public class Main {
                     if (user == null) {
                         insertUser(conn, name, password);
                     }
+                    else if (!password.equals(user.password)) {
+                        Spark.halt(403);
+                        return null;
+                    }
                     Session session = request.session();
                     session.attribute("username", name);
                     response.redirect("/");
