@@ -196,7 +196,7 @@ public class Main {
         );
 
         Spark.post(
-                "/gallery/:id",
+                "/delete-gallery/:id",
                 (request, response) -> {
                     JsonParser parser = new JsonParser();
                     int id = parser.parse(request.params(":id"));
@@ -205,8 +205,9 @@ public class Main {
                 }
         );
 
+
         Spark.post(
-                "/user/:id",
+                "/delete-user/:id",
                 (request, response) -> {
                     JsonParser parser = new JsonParser();
                     int id = parser.parse(request.params(":id"));
