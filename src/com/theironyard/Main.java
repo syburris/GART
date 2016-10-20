@@ -176,8 +176,8 @@ public class Main {
                 }
         );
 
-        Spark.put(
-                "/gallery",
+        Spark.post(
+                "/update-gallery",
                 (request, response) -> {
                     Session session = request.session();
                     String email = session.attribute("username");
@@ -194,7 +194,7 @@ public class Main {
                 }
         );
 
-        Spark.delete(
+        Spark.post(
                 "/gallery/:id",
                 (request, response) -> {
                     JsonParser parser = new JsonParser();
@@ -204,7 +204,7 @@ public class Main {
                 }
         );
 
-        Spark.delete(
+        Spark.post(
                 "/user/:id",
                 (request, response) -> {
                     JsonParser parser = new JsonParser();
