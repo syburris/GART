@@ -200,7 +200,7 @@ public class Main {
                 (request, response) -> {
                     JsonParser parser = new JsonParser();
                     int id = parser.parse(request.params(":id"));
-                    deleteGallery(conn,id);
+                    deleteGallery(conn, id);
                     return "Gallery deleted.";
                 }
         );

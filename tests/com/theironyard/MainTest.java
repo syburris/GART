@@ -65,6 +65,7 @@ public class MainTest {
         Main.insertGallery(conn,gallery2,user);
         Main.deleteGallery(conn,1);
         ArrayList<Gallery> galleries = Main.selectGalleries(conn);
+        System.out.println(galleries);
         conn.close();
         assertTrue(galleries.size()==1);
     }
