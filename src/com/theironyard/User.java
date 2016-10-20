@@ -11,10 +11,6 @@ public class User {
     public User() {
     }
 
-    public User(int id, String email) {
-        this.id = id;
-        this.email = email;
-    }
 
     public User(int id, String email, String password) {
         this.id = id;

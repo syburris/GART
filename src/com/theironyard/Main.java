@@ -31,7 +31,8 @@ public class Main {
         ResultSet results = stmt.executeQuery();
         if (results.next()) {
             int id = results.getInt("id");
-            return new User(id, email);
+            String password = results.getString("password");
+            return new User(id, email, password);
         }
         return null;
     }
