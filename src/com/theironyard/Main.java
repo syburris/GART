@@ -37,6 +37,15 @@ public class Main {
         return null;
     }
 
+    public static User updateUser(Connection conn, User user) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("UPDATE users SET email = ?, password = ? WHERE id = ?");
+        stmt.setString(1,user.email);
+        stmt.setString(2,user.password);
+        stmt.setInt(3,user.id);
+        stmt.execute();
+        return new User(user.id, user.email, user.password);
+    }
+
     public static ArrayList<User> selectUsers(Connection conn) throws SQLException {
         ArrayList<User> users = new ArrayList<>();
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users");
@@ -144,6 +153,17 @@ public class Main {
                     User user = selectUser(conn, email);
                     JsonSerializer serializer = new JsonSerializer();
                     return serializer.serialize(user);
+                }
+        );
+
+        Spark.post(
+                "/user",
+                (request, response) -> {
+                    String body = request.body();
+                    JsonParser parser = new JsonParser();
+                    User user = parser.parse(body, User.class);
+                    updateUser(conn, user);
+                    return "User has been updated.";
                 }
         );
 
