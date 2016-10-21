@@ -40,41 +40,14 @@ var inputRouter = function(){
          break;
 
       case "show-form":
-
-         var galleryDummyDataArray = [
-           {
-                  galleryName: 'Atelier Gallery',
-                  artist: 'Claude Monet',
-                  genre: "Impressionism",
-                  time: "6:00pm"
-           },
-           {
-                  galleryName: 'Corrigan Gallery',
-                  artist: 'Frida Kahlo',
-                  genre: 'portrait' ,
-                  time: "7:00pm"
-           },
-           {
-                  galleryName: 'Hasley Gallery',
-                  artist: 'Gustav Klimt',
-                  genre: 'Symbolism' ,
-                  time: "5:00pm"
-           },
-         ]
-         showGalleriesPage(galleryDummyDataArray);
+      
+      $.getJSON("/gallery").then(function(serverRes){
+        //   console.log(serverRes)
+        showGalleriesPage(serverRes);
+      })
 
          break;
 
-         // case "gallery-listings":
-         $.post('/GART', JSON.stringify(objForData)).then(function(serverRes){
-               window.location.hash = "gallery-listings"
-             })
-
-
-          $.getJSON("/GART").then(function(serverRes){
-            //   console.log(serverRes)
-             showGalleriesPage();
-          })
 
       case "create-form":
          showGalleryPage()
@@ -91,13 +64,19 @@ var inputRouter = function(){
               console.log(objForData);
 
 
-  })
+      $.post('/gallery', JSON.stringify(objForData)).then(function(serverRes){
+         console.log("hello")
+         window.location.hash = "show-form"
+         showGalleriesPage();
+       })
+     })
+         break;
+         default:
 
-      break;
-      default:
-         document.querySelector('#app-container').innerHTML = "<h1 class='bg-danger'>PAGE NOT FOUND</h1>";
+      document.querySelector('#app-container').innerHTML = "<h1 class='bg-danger'>PAGE NOT FOUND</h1>";
    }
 }
+
 var createUser = function(evt){
    evt.preventDefault()
    console.log("email", evt.target.email.value)
@@ -111,7 +90,7 @@ var createUser = function(evt){
 
    $.post( '/login', JSON.stringify(dataForServer) ).then(function(whateversentback){
       console.log('Success !!!!')
-      window.location.hash = "user-profile/" + dataForServer.email
+      mainDisplayContainer()
    })
 
 }

@@ -20,10 +20,10 @@ var showGalleriesPage = function(galleryArr){
 
 forEach(galleryArr, function(galleryData){
       upComingShowStr +=        '<tr>'
-      upComingShowStr +=          '<td>'+galleryData.galleryName+'</td>'
-      upComingShowStr +=           '<td>'+galleryData.artist+'</td>'
-      upComingShowStr +=           '<td>'+galleryData.genre+'</td>'
-      upComingShowStr +=           '<td>'+galleryData.time+'</td>'
+      upComingShowStr +=          '<td>'+galleryData.galleryName + '</td>'
+      upComingShowStr +=           '<td>'+galleryData.artist + '</td>'
+      upComingShowStr +=           '<td>'+galleryData.genre + '</td>'
+      upComingShowStr +=           '<td>'+galleryData.time + '</td>'
       upComingShowStr +=         '</tr>'
    })
       upComingShowStr +=    '</tbody>'

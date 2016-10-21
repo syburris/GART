@@ -1,8 +1,8 @@
-// var forEach = function(arr, cb){
-//    for(var i = 0 ; i < arr.length; i+=1){
-//       cb(arr[i], i, arr)
-//    }
-// }
+var forEach = function(arr, cb){
+   for(var i = 0 ; i < arr.length; i+=1){
+      cb(arr[i], i, arr)
+   }
+}
 
 var showGalleryPage = function(){
    var values = [
@@ -20,7 +20,7 @@ var showGalleryPage = function(){
    forEach(values, function(field){
     console.log(field)
       galleryStr +=     ' <div class="form-group">'
-      galleryStr +=       ' <label for="'+field.column+'">'+field.labelName+'</label>'
+      galleryStr +=       ' <label for="' + field.column + '">' + field.labelName + '</label>'
       galleryStr +=        '<input type="text" class="form-control" name="'+field.attr+'">'
       galleryStr +=      '</div>'
    })
