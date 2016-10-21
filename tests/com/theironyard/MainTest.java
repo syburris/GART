@@ -48,7 +48,7 @@ public class MainTest {
         Gallery gallery = new Gallery(1,"Gibbs", "Monet", "impressionist", "Today", 1);
         Gallery gallery2 = new Gallery(1,"Museum", "Eddy", "impressionist", "Today", 1);
         Main.insertGallery(conn,gallery,user);
-        Main.updateGallery(conn,gallery2);
+        Main.updateGallery(conn,gallery2,user);
         ArrayList<Gallery> galleries = Main.selectGalleries(conn);
         conn.close();
         assertTrue(galleries.get(0).artist == "Eddy");
@@ -65,6 +65,7 @@ public class MainTest {
         Main.insertGallery(conn,gallery2,user);
         Main.deleteGallery(conn,1);
         ArrayList<Gallery> galleries = Main.selectGalleries(conn);
+        System.out.println(galleries);
         conn.close();
         assertTrue(galleries.size()==1);
     }
