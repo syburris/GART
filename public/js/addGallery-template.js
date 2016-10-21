@@ -18,7 +18,7 @@ var showGalleryPage = function(){
    galleryStr +=     '<h2 class="">Submit New Gallery</h2>'
 
    forEach(values, function(field){
-    console.log(field)
+    //console.log(field)
       galleryStr +=     ' <div class="form-group">'
       galleryStr +=       ' <label for="' + field.column + '">' + field.labelName + '</label>'
       galleryStr +=        '<input type="text" class="form-control" name="'+field.attr+'">'

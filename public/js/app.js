@@ -20,12 +20,7 @@ var inputRouter = function(){
    }
 
 
-   var hashComp = currentHash.split('/')
-   //console.log(HashComp)
-
-   var newHash = hashComp[0]
-
-   switch(newHash){
+   switch(currentHash){
 
       case "login":
          showAuthPage();
@@ -39,39 +34,40 @@ var inputRouter = function(){
          showArtist();
          break;
 
-      case "show-form":
-      
-      $.getJSON("/gallery").then(function(serverRes){
-        //   console.log(serverRes)
-        showGalleriesPage(serverRes);
-      })
-
-         break;
-
-
       case "create-form":
          showGalleryPage()
          document.querySelector('#new-gallery-form').addEventListener('submit', function(evt){
            evt.preventDefault()
                var createFormEl = evt.target
 
-               var objForData = {
+               var dataObj = {
                   gallery: createFormEl.galleryName.value,
-                  artist:  createFormEl.artist.value,
+                  artist: createFormEl.artist.value,
                   genre: createFormEl.genre.value,
                   time: createFormEl.time.value
                        }
-              console.log(objForData);
+              console.log(dataObj);
 
-
-      $.post('/gallery', JSON.stringify(objForData)).then(function(serverRes){
-         console.log("hello")
-         window.location.hash = "show-form"
-         showGalleriesPage();
+         $.post('/gallery', JSON.stringify(dataObj)).then(function(serverRes){
+            console.log("hello")
+            console.log(serverRes)
+            window.location.hash = "show-form"
+            //showGalleriesPage();
        })
+
      })
          break;
+
+         case "show-form":
+
+         $.getJSON('/gallery').then(function(serverRes){
+             console.log(serverRes)
+           showGalleriesPage(serverRes);
+         })
+
+         break;
          default:
+
 
       document.querySelector('#app-container').innerHTML = "<h1 class='bg-danger'>PAGE NOT FOUND</h1>";
    }
