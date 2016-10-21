@@ -41,7 +41,7 @@ var inputRouter = function(){
                var createFormEl = evt.target
 
                var dataObj = {
-                  gallery: createFormEl.galleryName.value,
+                  galleryName: createFormEl.galleryName.value,
                   artist: createFormEl.artist.value,
                   genre: createFormEl.genre.value,
                   time: createFormEl.time.value
@@ -59,10 +59,12 @@ var inputRouter = function(){
          break;
 
          case "show-form":
-
+         console.log("fetching for gallery")
          $.getJSON('/gallery').then(function(serverRes){
              console.log(serverRes)
-           showGalleriesPage(serverRes);
+             showGalleriesPage(serverRes);
+         }).fail(function(err){
+            console.log('too bad', err)
          })
 
          break;
