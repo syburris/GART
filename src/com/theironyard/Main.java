@@ -60,19 +60,19 @@ public class Main {
         return users;
     }
 
-    public static void insertGallery(Connection conn, Gallery gallery, User user) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("INSERT INTO galleries VALUES (NULL, ?, ?, ?, ?, ?)");
+    public static void insertGallery(Connection conn, Gallery gallery) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO galleries VALUES (NULL, ?, ?, ?, ?)");
         stmt.setString(1, gallery.galleryName);
         stmt.setString(2, gallery.artist);
         stmt.setString(3, gallery.genre);
         stmt.setString(4, gallery.time);
-        stmt.setInt(5, user.id);
+//        stmt.setInt(5, user.id);
         stmt.execute();
     }
 
     static ArrayList<Gallery> selectGalleries(Connection conn) throws SQLException {
         ArrayList<Gallery> galleries = new ArrayList<>();
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM galleries INNER JOIN users ON galleries.user_id = users.id");
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM galleries");
         ResultSet results = stmt.executeQuery();
         while (results.next()) {
             int id = results.getInt("galleries.id");
@@ -80,8 +80,8 @@ public class Main {
             String artist = results.getString("galleries.artist");
             String genre = results.getString("galleries.genre");
             String time = results.getString("galleries.time");
-            int userId = results.getInt("users.id");
-            Gallery gallery = new Gallery(id,galleryName,artist,genre,time,userId);
+//            int userId = results.getInt("users.id");
+            Gallery gallery = new Gallery(id,galleryName,artist,genre,time);
             galleries.add(gallery);
         }
         return galleries;
@@ -112,6 +112,14 @@ public class Main {
         stmt.execute();
     }
 
+//    public static void seedData(Connection conn) throws SQLException {
+//        PreparedStatement stmt = conn.prepareStatement("COUNT(*)");
+//        ResultSet results = stmt.executeQuery();
+//        if (results == null) {
+//            Statement addGallery =
+//        }
+//    }
+
 
     public static void main(String[] args) throws SQLException {
         Server.createWebServer().start();
@@ -120,66 +128,66 @@ public class Main {
         Spark.externalStaticFileLocation("public");
         Spark.init();
 
-        Spark.post(
-                "/login",
-                (request, response) -> {
-                    String body = request.body();
-                    JsonParser parser = new JsonParser();
-                    User user = parser.parse(body,User.class);
-                    User userFromDB = selectUser(conn,user.email);
-                    if (userFromDB == null) {
-                        insertUser(conn, user.email, user.password);
-                        userFromDB = selectUser(conn,user.email);
-                    }
-                    else if (!user.password.equals(userFromDB.password)) {
-                        Spark.halt(403);
-                        return null;
-                    }
-                    Session session = request.session();
-                    session.attribute("username", user.email);
-                    JsonSerializer serializer = new JsonSerializer();
-                    return serializer.serialize(userFromDB);
-                }
-        );
+//        Spark.post(
+//                "/login",
+//                (request, response) -> {
+//                    String body = request.body();
+//                    JsonParser parser = new JsonParser();
+//                    User user = parser.parse(body,User.class);
+//                    User userFromDB = selectUser(conn,user.email);
+//                    if (userFromDB == null) {
+//                        insertUser(conn, user.email, user.password);
+//                        userFromDB = selectUser(conn,user.email);
+//                    }
+//                    else if (!user.password.equals(userFromDB.password)) {
+//                        Spark.halt(403);
+//                        return null;
+//                    }
+//                    Session session = request.session();
+//                    session.attribute("username", user.email);
+//                    JsonSerializer serializer = new JsonSerializer();
+//                    return serializer.serialize(userFromDB);
+//                }
+//        );
 
-        Spark.get(
-                "/user",
-                (request, response) -> {
-                    Session session = request.session();
-                    String email = session.attribute("username");
-                    if (email == null) {
-                        return "";
-                    }
-                    User user = selectUser(conn, email);
-                    JsonSerializer serializer = new JsonSerializer();
-                    return serializer.serialize(user);
-                }
-        );
+//        Spark.get(
+//                "/user",
+//                (request, response) -> {
+//                    Session session = request.session();
+//                    String email = session.attribute("username");
+//                    if (email == null) {
+//                        return "";
+//                    }
+//                    User user = selectUser(conn, email);
+//                    JsonSerializer serializer = new JsonSerializer();
+//                    return serializer.serialize(user);
+//                }
+//        );
 
-        Spark.post(
-                "/user",
-                (request, response) -> {
-                    String body = request.body();
-                    JsonParser parser = new JsonParser();
-                    User user = parser.parse(body, User.class);
-                    updateUser(conn, user);
-                    return "User has been updated.";
-                }
-        );
+//        Spark.post(
+//                "/user",
+//                (request, response) -> {
+//                    String body = request.body();
+//                    JsonParser parser = new JsonParser();
+//                    User user = parser.parse(body, User.class);
+//                    updateUser(conn, user);
+//                    return "User has been updated.";
+//                }
+//        );
 
         Spark.post(
                 "/gallery",
                 (request, response) -> {
-                    Session session = request.session();
-                    String email = session.attribute("username");
-                    if (email == null) {
-                        return "";
-                    }
-                    User user = selectUser(conn, email);
+//                    Session session = request.session();
+//                    String email = session.attribute("username");
+//                    if (email == null) {
+//                        return "";
+//                    }
+//                    User user = selectUser(conn, email);
                     String body = request.body();
                     JsonParser parser = new JsonParser();
                     Gallery gallery = parser.parse(body, Gallery.class);
-                    insertGallery(conn,gallery,user);
+                    insertGallery(conn,gallery);
                     return "Gallery has been added.";
                 }
         );
@@ -187,11 +195,11 @@ public class Main {
         Spark.get(
                 "/gallery",
                 (request, response) -> {
-                    Session session = request.session();
-                    String email = session.attribute("username");
-                    if (email == null) {
-                        return "";
-                    }
+//                    Session session = request.session();
+//                    String email = session.attribute("username");
+//                    if (email == null) {
+//                        return "";
+//                    }
                     JsonSerializer serializer = new JsonSerializer();
                     return serializer.serialize(selectGalleries(conn));
                 }
