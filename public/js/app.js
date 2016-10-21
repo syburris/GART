@@ -20,7 +20,13 @@ var inputRouter = function(){
    }
 
 
-   switch(currentHash){
+   var hashComp = currentHash.split('/')
+   //console.log(HashComp)
+
+   var newHash = hashComp[0]
+
+   switch(newHash){
+
       case "login":
          showAuthPage();
          break;
@@ -34,35 +40,40 @@ var inputRouter = function(){
          break;
 
       case "show-form":
-         showGalleriesPage();
+
+         var galleryDummyDataArray = [
+           {
+                  galleryName: 'Atelier Gallery',
+                  artist: 'Claude Monet',
+                  genre: "Impressionism",
+                  time: "6:00pm"
+           },
+           {
+                  galleryName: 'Corrigan Gallery',
+                  artist: 'Frida Kahlo',
+                  genre: 'portrait' ,
+                  time: "7:00pm"
+           },
+           {
+                  galleryName: 'Hasley Gallery',
+                  artist: 'Gustav Klimt',
+                  genre: 'Symbolism' ,
+                  time: "5:00pm"
+           },
+         ]
+         showGalleriesPage(galleryDummyDataArray);
+
          break;
 
-         case "gallery-listings":
-          var galleryDataArray = [
-             {
-                   galleryName: 'Atelier Gallery',
-                   artist: 'Claude Monet',
-                   genre: "Impressionism",
-                   time: "6:00pm"
-             },
-             {
-                   galleryName: 'Corrigan Gallery',
-                   artist: 'Frida Kahlo',
-                   genre: 'portrait' ,
-                   time: "7:00pm"
-             },
-             {
-                   galleryName: 'Hasley Gallery',
-                   artist: 'Gustav Klimt',
-                   genre: 'Symbolism' ,
-                   time: "5:00pm"
-             },
-          ]
+         // case "gallery-listings":
+         $.post('/GART', JSON.stringify(objForData)).then(function(serverRes){
+               window.location.hash = "gallery-listings"
+             })
 
 
           $.getJSON("/GART").then(function(serverRes){
-              console.log(serverRes)
-             showCacklesPage(serverRes);
+            //   console.log(serverRes)
+             showGalleriesPage();
           })
 
       case "create-form":
@@ -79,20 +90,18 @@ var inputRouter = function(){
                        }
               console.log(objForData);
 
-$.post('/GART', JSON.stringify(objForData)).then(function(serverRes){
-      window.location.hash = "gallery-listings"
-    })
+
   })
 
       break;
       default:
-         document.querySelector('#app-container').innerHTML = "<h1 class='bg-warning'>PAGE NOT FOUND</h1>";
+         document.querySelector('#app-container').innerHTML = "<h1 class='bg-danger'>PAGE NOT FOUND</h1>";
    }
 }
-var authenticateUser = function(evt){
+var createUser = function(evt){
    evt.preventDefault()
    console.log("email", evt.target.email.value)
-   console.log("passord", evt.target.password.value)
+   console.log("password", evt.target.password.value)
    var dataForServer = {
       email: evt.target.email.value,
       password: evt.target.password.value
@@ -102,7 +111,7 @@ var authenticateUser = function(evt){
 
    $.post( '/login', JSON.stringify(dataForServer) ).then(function(whateversentback){
       console.log('Success !!!!')
-      window.location.hash = "user-profile/" +dataForServer.email
+      window.location.hash = "user-profile/" + dataForServer.email
    })
 
 }

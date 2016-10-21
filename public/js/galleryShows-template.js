@@ -3,29 +3,33 @@ var forEach = function(arr, cb){
       cb(arr[i], i, arr)
    }
 }
+
 var showGalleriesPage = function(galleryArr){
-   var upComingShowStr = ''
+  var upComingShowStr = ''
       upComingShowStr += '<div class="container galleryshows">'
-      upComingShowStr += '<table class="table">'
-      upComingShowStr +=    '<thead>'
+      upComingShowStr +=    '<table class="table">'
+      upComingShowStr +=      '<thead>'
       upComingShowStr +=       '<tr>'
       upComingShowStr +=          '<th>Gallery</th>'
       upComingShowStr +=          '<th>Artist</th>'
       upComingShowStr +=          '<th>Genre</th>'
       upComingShowStr +=          '<th>Time</th>'
       upComingShowStr +=       '</tr>'
-      upComingShowStr +=    '</thead>'
+      upComingShowStr +=      '</thead>'
       upComingShowStr +=    '<tbody>'
 
-   forEach(galleryArr, function(galleryData){
-      upComingShowStr += '<tr>'
-      upComingShowStr +=    '<td>'+galleryData.galleryName+'</td>'
-      upComingShowStr +=    '<td>'+galleryData.artist+'</td>'
-      upComingShowStr +=    '<td>'+galleryData.genre+'</td>'
-      upComingShowStr +=    '<td>'+galleryData.time+'</td>'
-      upComingShowStr += '</tr>'
+forEach(galleryArr, function(galleryData){
+      upComingShowStr +=        '<tr>'
+      upComingShowStr +=          '<td>'+galleryData.galleryName+'</td>'
+      upComingShowStr +=           '<td>'+galleryData.artist+'</td>'
+      upComingShowStr +=           '<td>'+galleryData.genre+'</td>'
+      upComingShowStr +=           '<td>'+galleryData.time+'</td>'
+      upComingShowStr +=         '</tr>'
    })
+      upComingShowStr +=    '</tbody>'
+      upComingShowStr +=   '</table>'
+      upComingShowStr += '</div>'
 
-   upComingShowStr +=    '</tbody>'
+   document.querySelector('#app-container').innerHTML = upComingShowStr
 
 }

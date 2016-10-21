@@ -9,7 +9,6 @@ var showArtist = function(artistList){
   bigList +=   '<li> Tamera de Lempicka<li>'
   bigList +=   '<li> Frida Kahlo <li>'
   bigList +=   '<li> Joan Mitchell<li>'
-  bigList +=   '<li> Louise Bourgeois <li>'
   bigList += '<li> Kara Walker <li>'
   bigList += '</div>'
 

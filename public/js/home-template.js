@@ -6,7 +6,7 @@ var mainDisplayContainer = function(){
    myDisplayStr +=      '<p><a class="btn btn-primary btn-lg login-btn" href="#login" role="button">Login</a></p>'
    myDisplayStr +=   '</div>'
    myDisplayStr +=   '<div class ="container text-center">'
-   myDisplayStr +=        '<h1 class ="showing-container"> SHOWINGS</h1>'
+   myDisplayStr +=        '<h1 class ="showing-container"> SHOWINGS AND INFORMATION</h1>'
    myDisplayStr +=    '</div>'
    myDisplayStr +=   '<div class="container-fluid text-center">'
    myDisplayStr +=            '<div class="row">'

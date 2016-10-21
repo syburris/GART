@@ -376,11 +376,8 @@ img {
 
 .display-container {
   background: #16BFFD;
-  /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #16BFFD, #CB3066);
-  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #16BFFD, #CB3066);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   margin: 0;
   color: #FFF;
   text-shadow: 4px 4px 8px #000000; }
@@ -445,7 +442,8 @@ p {
   background: -webkit-linear-gradient(to left, #E55D87, #5FC3E4);
   /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #E55D87, #5FC3E4);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  padding: 20px; }
   .galleryList li {
     margin-top: 40px;
     font-size: 20px;
@@ -457,7 +455,11 @@ p {
     text-align: left;
     color: #FFF; }
     .galleryList li img {
-      width: 75%; }
+      width: 85%; }
+    .galleryList li a {
+      position: fixed;
+      top: 5%;
+      right: 95%; }
 
 .artistList {
   background: #E55D87;
@@ -467,9 +469,11 @@ p {
   background: linear-gradient(to left, #E55D87, #5FC3E4);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
   .artistList li {
+    padding: 10px;
     font-size: 20px;
     font-family: fantasy;
-    text-shadow: 4px 4px 8px #000000; }
+    text-shadow: 4px 4px 8px #000000;
+    list-style-type: none; }
 
 #new-gallery-form {
   color: #FFF;
@@ -488,12 +492,7 @@ p {
   border-radius: 25px; }
 
 .galleryShows {
-  background: #E55D87;
-  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #E55D87, #5FC3E4);
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #E55D87, #5FC3E4);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
+  background-color: #3498db; }
 
 /*# sourceMappingURL=styles.css.map */
 
