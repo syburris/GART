@@ -12,7 +12,7 @@ var showArtist = function(artistList){
   bigList += '<li> Kara Walker <li>'
   bigList += '</div>'
 
-  console.log(bigList)
+  //console.log(bigList)
   document.querySelector('#app-container').innerHTML = bigList
 
 }
