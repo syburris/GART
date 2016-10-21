@@ -15,7 +15,7 @@ public class Main {
         Statement stmt = conn.createStatement();
         stmt.execute("CREATE TABLE IF NOT EXISTS users (id IDENTITY, email VARCHAR, password VARCHAR)");
         stmt.execute("CREATE TABLE IF NOT EXISTS galleries (id IDENTITY, gallery VARCHAR, " +
-                "artist VARCHAR, genre VARCHAR, time VARCHAR, user_id INT)");
+                "artist VARCHAR, genre VARCHAR, time VARCHAR)");
     }
 
     public static void insertUser(Connection conn, String name, String password) throws SQLException {
