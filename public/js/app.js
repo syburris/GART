@@ -82,13 +82,12 @@ var inputRouter = function(){
 
 var createUser = function(evt){
    document.querySelector('#auth-form').addEventListener('submit', function(evt){
-      evt.preventDefault()
-      var createEmailPassword = evt.target
+
    console.log("email", evt.target.email.value)
    console.log("password", evt.target.password.value)
    var dataForServer = {
-      email: createEmailPassword.email.value,
-      password: createEmailPassword.password.value
+      email: evt.target.email.value,
+      password: evt.target.password.value
    }
 
    console.log(dataForServer)
@@ -105,7 +104,11 @@ var createUser = function(evt){
 
    })
 })
+
 }
+createUser()
 }
+
 inputRouter()
+
 window.addEventListener('hashchange', inputRouter)
