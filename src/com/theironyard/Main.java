@@ -15,7 +15,7 @@ public class Main {
         Statement stmt = conn.createStatement();
         stmt.execute("CREATE TABLE IF NOT EXISTS users (id IDENTITY, email VARCHAR, password VARCHAR)");
         stmt.execute("CREATE TABLE IF NOT EXISTS galleries (id IDENTITY, gallery VARCHAR, " +
-                "artist VARCHAR, genre VARCHAR, time VARCHAR)");
+                "artist VARCHAR, genre VARCHAR, time VARCHAR, user_id INT)");
     }
 
     public static void insertUser(Connection conn, String name, String password) throws SQLException {
@@ -60,19 +60,19 @@ public class Main {
         return users;
     }
 
-    public static void insertGallery(Connection conn, Gallery gallery) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("INSERT INTO galleries VALUES (NULL, ?, ?, ?, ?)");
+    public static void insertGallery(Connection conn, Gallery gallery, User user) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO galleries VALUES (NULL, ?, ?, ?, ?, ?)");
         stmt.setString(1, gallery.galleryName);
         stmt.setString(2, gallery.artist);
         stmt.setString(3, gallery.genre);
         stmt.setString(4, gallery.time);
-//        stmt.setInt(5, user.id);
+        stmt.setInt(5, user.id);
         stmt.execute();
     }
 
     static ArrayList<Gallery> selectGalleries(Connection conn) throws SQLException {
         ArrayList<Gallery> galleries = new ArrayList<>();
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM galleries");
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM galleries INNER JOIN users ON galleries.user_id = users.id");
         ResultSet results = stmt.executeQuery();
         while (results.next()) {
             int id = results.getInt("galleries.id");
@@ -80,8 +80,8 @@ public class Main {
             String artist = results.getString("galleries.artist");
             String genre = results.getString("galleries.genre");
             String time = results.getString("galleries.time");
-//            int userId = results.getInt("users.id");
-            Gallery gallery = new Gallery(id,galleryName,artist,genre,time);
+            int userId = results.getInt("users.id");
+            Gallery gallery = new Gallery(id,galleryName,artist,genre,time,userId);
             galleries.add(gallery);
         }
         return galleries;
@@ -111,14 +111,6 @@ public class Main {
         stmt.setInt(1,id);
         stmt.execute();
     }
-
-//    public static void seedData(Connection conn) throws SQLException {
-//        PreparedStatement stmt = conn.prepareStatement("COUNT(*)");
-//        ResultSet results = stmt.executeQuery();
-//        if (results == null) {
-//            Statement addGallery =
-//        }
-//    }
 
 
     public static void main(String[] args) throws SQLException {
@@ -178,16 +170,16 @@ public class Main {
         Spark.post(
                 "/gallery",
                 (request, response) -> {
-//                    Session session = request.session();
-//                    String email = session.attribute("username");
-//                    if (email == null) {
-//                        return "";
-//                    }
-//                    User user = selectUser(conn, email);
+                    Session session = request.session();
+                    String email = session.attribute("username");
+                    if (email == null) {
+                        return "";
+                    }
+                    User user = selectUser(conn, email);
                     String body = request.body();
                     JsonParser parser = new JsonParser();
                     Gallery gallery = parser.parse(body, Gallery.class);
-                    insertGallery(conn,gallery);
+                    insertGallery(conn,gallery,user);
                     return "Gallery has been added.";
                 }
         );
@@ -195,11 +187,11 @@ public class Main {
         Spark.get(
                 "/gallery",
                 (request, response) -> {
-//                    Session session = request.session();
-//                    String email = session.attribute("username");
-//                    if (email == null) {
-//                        return "";
-//                    }
+                    Session session = request.session();
+                    String email = session.attribute("username");
+                    if (email == null) {
+                        return "";
+                    }
                     JsonSerializer serializer = new JsonSerializer();
                     return serializer.serialize(selectGalleries(conn));
                 }
