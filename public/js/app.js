@@ -87,24 +87,18 @@ var inputRouter = function(){
 
 var createUser = function(evt){
    evt.preventDefault()
+   document.querySelector('#auth-form').addEventListener('submit', function(evt){
+
    console.log("email", evt.target.email.value)
    console.log("password", evt.target.password.value)
    var dataForServer = {
       email: evt.target.email.value,
       password: evt.target.password.value
    }
-   var reqConfig2 = {
-      url: '/login',
-      data: JSON.stringify(dataForServer),
-      headers: {
-         "Content-Type": 'application/json'
-      }
-   }
 
+   console.log(dataForServer)
 
-   console.log('to server:', JSON.stringify(dataForServer))
-
-   $.post(reqConfig2 ).then(function(whateversentback){
+   $.post( '/login', JSON.stringify(dataForServer) ).then(function(whateversentback){
       console.log('Success !!!!')
       mainDisplayContainer()
    })

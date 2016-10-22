@@ -98,9 +98,7 @@ p{
    margin-top: 5px;
    border-radius: 15px;
    display: inline-block;
-   img{
-      width: 50%;
-   }
+
       li{
          font-size: 20px;
          font-family: fantasy;
@@ -110,7 +108,9 @@ p{
          height: 250px;
          text-align: left;
          color: #FFF;
-
+         img{
+            width: 80%;
+         }
          a{
             position: fixed;
             top: 5%;
@@ -119,23 +119,23 @@ p{
          }
       }
  }
-.maryMartinPic{
-   background-image: url('images/download.jpeg') no-repeat center center fixed;
-}
-.maryMartinText{
-   width: 20%;
-	background:#FFF;
-	opacity:0;
-}
-.maryMartinPic:hover .maryMartinText{
-	opacity:0.6;
-	text-align:justify;
-	color:#000000;
-	font-size:20px;
-	font-weight:700;
-	font-family: fantasy, sans-serif;
-	padding:30px;
-}
+// .maryMartinPic{
+//    background-image: url('images/download.jpeg') no-repeat center center fixed;
+// }
+// .maryMartinText{
+//    width: 20%;
+// 	background:#FFF;
+// 	opacity:0;
+// }
+// .maryMartinPic:hover .maryMartinText{
+// 	opacity:0.6;
+// 	text-align:justify;
+// 	color:#000000;
+// 	font-size:20px;
+// 	font-weight:700;
+// 	font-family: fantasy, sans-serif;
+// 	padding:30px;
+// }
 .galleryListBg{
    background: url('/Users/Dolpator/TIY/assignments/Assignment-21-GART/public/images/mainpageImg.jpeg')no-repeat center;
    background-size: cover;

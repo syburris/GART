@@ -17,7 +17,6 @@ var showGallery = function (galleryList){
     bigList +=       '<li thumbnail text-center><img src="images/download (2).jpeg"/> Gordon Wheeler </li>'
     bigList +=       '<li thumbnail text-center><img src="images/images.jpeg"/> Halsey Institute </li>'
     bigList +=       '<li thumbnail text-center><img src="images/images (3).jpeg"/>Audobon Gallery </li>'
-    bigList +=     '</ul>'
     bigList +=    '</div>'
     bigList += '</div>'
 
