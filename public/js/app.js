@@ -72,6 +72,7 @@ var inputRouter = function(){
          $.getJSON('/gallery').then(function(serverRes){
              console.log(serverRes)
              showGalleriesPage(serverRes);
+
          }).fail(function(err){
             console.log('too bad', err)
          })
@@ -92,10 +93,18 @@ var createUser = function(evt){
       email: evt.target.email.value,
       password: evt.target.password.value
    }
+   var reqConfig2 = {
+      url: '/login',
+      data: JSON.stringify(dataForServer),
+      headers: {
+         "Content-Type": 'application/json'
+      }
+   }
+
 
    console.log('to server:', JSON.stringify(dataForServer))
 
-   $.post( '/login', JSON.stringify(dataForServer) ).then(function(whateversentback){
+   $.post(reqConfig2 ).then(function(whateversentback){
       console.log('Success !!!!')
       mainDisplayContainer()
    })
