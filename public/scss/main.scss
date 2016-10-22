@@ -13,12 +13,15 @@ img {
 }
 
 .display-container {
-  background: #16BFFD;
-  background: -webkit-linear-gradient(to left, #16BFFD, #CB3066);
-  background: linear-gradient(to left, #16BFFD, #CB3066);
-  margin: 0;
-  color: #FFF;
-  text-shadow: 4px 4px 8px #000000;
+     background: url('/images/mainpageImg.jpeg') no-repeat fixed;
+     background-size: contain;
+
+  // background: #16BFFD;
+  // background: -webkit-linear-gradient(to left, #16BFFD, #CB3066);
+  // background: linear-gradient(to left, #16BFFD, #CB3066);
+     margin: 0;
+     color: #FFF;
+     text-shadow: 4px 4px 8px #000000;
 }
 h1{
    font-size: 50px;
@@ -33,7 +36,7 @@ p{
 .appName{
 
    font-size: 50px;
-   color: #FFF;
+   color: #000;
    text-shadow: 2px 2px 4px #000000;
    font-family: fantasy;
     }
@@ -56,10 +59,10 @@ p{
   color: #FFF;
   border-radius: 25px;
   text-shadow: 4px 4px 8px #000000;
-
-
 }
-
+.thumbnail{
+   width: 20%;
+}
 .artist {
   padding: 10px;
   background-color: #F9690E;
@@ -70,7 +73,7 @@ p{
 }
 
 .createShow {
-  padding: 10px;
+  padding: 7px;
   background-color: #8E44AD;
   color: #FFF;
   border-radius: 25px;
@@ -79,7 +82,7 @@ p{
 }
 
 .showGalleries{
-  padding: 10px;
+   padding: 7px;
   background-color: #86E2D5;
   color: #FFF;
   border-radius: 25px;
@@ -91,9 +94,14 @@ p{
    background: #E55D87; /* fallback for old browsers */
    background: -webkit-linear-gradient(to left, #E55D87 , #5FC3E4); /* Chrome 10-25, Safari 5.1-6 */
    background: linear-gradient(to left, #E55D87 , #5FC3E4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-   padding: 20px;
+   padding: 5px;
+   margin-top: 5px;
+   border-radius: 15px;
+   display: inline-block;
+   img{
+      width: 50%;
+   }
       li{
-         margin-top: 40px;
          font-size: 20px;
          font-family: fantasy;
          text-shadow: 4px 4px 8px #000000;
@@ -102,9 +110,7 @@ p{
          height: 250px;
          text-align: left;
          color: #FFF;
-         img{
-            width: 85%;
-         }
+
          a{
             position: fixed;
             top: 5%;
@@ -112,19 +118,50 @@ p{
 
          }
       }
+ }
+.maryMartinPic{
+   background-image: url('images/download.jpeg') no-repeat center center fixed;
+}
+.maryMartinText{
+   width: 20%;
+	background:#FFF;
+	opacity:0;
+}
+.maryMartinPic:hover .maryMartinText{
+	opacity:0.6;
+	text-align:justify;
+	color:#000000;
+	font-size:20px;
+	font-weight:700;
+	font-family: fantasy, sans-serif;
+	padding:30px;
+}
+.galleryListBg{
+   background: url('/Users/Dolpator/TIY/assignments/Assignment-21-GART/public/images/mainpageImg.jpeg')no-repeat center;
+   background-size: cover;
+   height: 100vh;
 }
 .artistList{
 
    background: #E55D87; /* fallback for old browsers */
    background: -webkit-linear-gradient(to left, #E55D87 , #5FC3E4); /* Chrome 10-25, Safari 5.1-6 */
    background: linear-gradient(to left, #E55D87 , #5FC3E4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+   background-size: cover;
+   margin-top:50px;
    li{
-      padding: 10px;
+      padding: 30px;
       font-size: 20px;
+      color: #FFF;
       font-family: fantasy;
       text-shadow: 4px 4px 8px #000000;
       list-style-type: none;
-
+      display: inline-block;
+      img{
+         width: 100%;
+      }
+      h1{
+         color: #FFF
+      }
 
    }
 }

@@ -13,7 +13,7 @@ var showGalleryPage = function(){
    ]
 
    var galleryStr = ''
-   galleryStr += '<div class="row ">'
+   galleryStr += '<div class="row galleryListBg">'
    galleryStr +=    '<form class="col-sm-offset-3 col-sm-6 galleryList" id="new-gallery-form">'
    galleryStr +=     '<h2 class="">Submit New Gallery</h2>'
 

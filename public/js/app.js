@@ -40,6 +40,7 @@ var inputRouter = function(){
            evt.preventDefault()
                var createFormEl = evt.target
 
+
                var dataObj = {
                   galleryName: createFormEl.galleryName.value,
                   artist: createFormEl.artist.value,
@@ -48,7 +49,15 @@ var inputRouter = function(){
                        }
               console.log(dataObj);
 
-         $.post('/gallery', JSON.stringify(dataObj)).then(function(serverRes){
+              var reqConfig = {
+                 url: '/gallery',
+                 data: JSON.stringify(dataObj),
+                 headers: {
+                    "Content-Type": 'application/json'
+                 }
+              }
+
+         $.post(reqConfig).then(function(serverRes){
             console.log("hello")
             console.log(serverRes)
             window.location.hash = "show-form"
