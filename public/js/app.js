@@ -82,7 +82,7 @@ var inputRouter = function(){
 
 var createUser = function(evt){
    document.querySelector('#auth-form').addEventListener('submit', function(evt){
-
+      evt.preventDefault()
    console.log("email", evt.target.email.value)
    console.log("password", evt.target.password.value)
    var dataForServer = {
