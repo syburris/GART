@@ -103,7 +103,7 @@ var createUser = function(evt){
       mainDisplayContainer()
    })
 
+})
 }
-
 inputRouter()
 window.addEventListener('hashchange', inputRouter)
