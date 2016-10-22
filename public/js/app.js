@@ -24,8 +24,7 @@ var inputRouter = function(){
 
       case "login":
          showAuthPage();
-         document.querySelector('#auth-form').addEventListener('submit', function(evt){
-})
+
          break;
 
       case "gallery-form":
@@ -41,7 +40,6 @@ var inputRouter = function(){
          document.querySelector('#new-gallery-form').addEventListener('submit', function(evt){
            evt.preventDefault()
                var createFormEl = evt.target
-
 
                var dataObj = {
                   galleryName: createFormEl.galleryName.value,
@@ -83,20 +81,30 @@ var inputRouter = function(){
 
 
 var createUser = function(evt){
-   evt.preventDefault()
+   document.querySelector('#auth-form').addEventListener('submit', function(evt){
+      evt.preventDefault()
+      var createEmailPassword = evt.target
    console.log("email", evt.target.email.value)
    console.log("password", evt.target.password.value)
    var dataForServer = {
-      email: evt.target.email.value,
-      password: evt.target.password.value
+      email: createEmailPassword.email.value,
+      password: createEmailPassword.password.value
    }
 
    console.log(dataForServer)
-   $.post( '/login', JSON.stringify(dataForServer) ).then(function(whateversentback){
+
+   var reqConfig2 = {
+      url: '/login',
+      data: JSON.stringify(dataForServer),
+      headers: {
+         "Content-Type": 'application/json'
+      }
+   }
+   $.post(reqConfig2).then(function(whateversentback){
       console.log('Success !!!!')
 
    })
-
+})
 }
 }
 inputRouter()
