@@ -64,31 +64,25 @@ var inputRouter = function(){
             //showGalleriesPage();
        })
 
-     })
+    })
          break;
 
          case "show-form":
-         console.log("fetching for gallery")
          $.getJSON('/gallery').then(function(serverRes){
              console.log(serverRes)
              showGalleriesPage(serverRes);
 
-         }).fail(function(err){
-            console.log('too bad', err)
          })
-
          break;
-         default:
-
-
-      document.querySelector('#app-container').innerHTML = "<h1 class='bg-danger'>PAGE NOT FOUND</h1>";
-   }
+//          default:
+//
+//       document.querySelector('#app-container').innerHTML = "<h1 class='bg-danger'>PAGE NOT FOUND</h1>";
 }
+
 
 var createUser = function(evt){
    evt.preventDefault()
    document.querySelector('#auth-form').addEventListener('submit', function(evt){
-
    console.log("email", evt.target.email.value)
    console.log("password", evt.target.password.value)
    var dataForServer = {
@@ -102,8 +96,9 @@ var createUser = function(evt){
       console.log('Success !!!!')
       mainDisplayContainer()
    })
-
 })
+
+}
 }
 inputRouter()
 window.addEventListener('hashchange', inputRouter)
