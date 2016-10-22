@@ -16,4 +16,5 @@ var showAuthPage = function(){
          passHTMLStr += '</div>'
 
    document.querySelector('#app-container').innerHTML = passHTMLStr
+   
 }

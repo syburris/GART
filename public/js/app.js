@@ -24,6 +24,7 @@ var inputRouter = function(){
 
       case "login":
          showAuthPage();
+
          break;
 
       case "gallery-form":
@@ -48,35 +49,40 @@ var inputRouter = function(){
                        }
               console.log(dataObj);
 
-         $.post('/gallery', JSON.stringify(dataObj)).then(function(serverRes){
+              var reqConfig = {
+                 url: '/gallery',
+                 data: JSON.stringify(dataObj),
+                 headers: {
+                    "Content-Type": 'application/json'
+                 }
+              }
+
+         $.post(reqConfig).then(function(serverRes){
             console.log("hello")
             console.log(serverRes)
             window.location.hash = "show-form"
             //showGalleriesPage();
        })
 
-     })
+    })
          break;
 
          case "show-form":
-         console.log("fetching for gallery")
          $.getJSON('/gallery').then(function(serverRes){
              console.log(serverRes)
              showGalleriesPage(serverRes);
-         }).fail(function(err){
-            console.log('too bad', err)
-         })
 
+         })
          break;
          default:
 
-
-      document.querySelector('#app-container').innerHTML = "<h1 class='bg-danger'>PAGE NOT FOUND</h1>";
-   }
+     document.querySelector('#app-container').innerHTML = "<h1 class='bg-danger'>PAGE NOT FOUND</h1>";
 }
 
+
 var createUser = function(evt){
-   evt.preventDefault()
+   document.querySelector('#auth-form').addEventListener('submit', function(evt){
+
    console.log("email", evt.target.email.value)
    console.log("password", evt.target.password.value)
    var dataForServer = {
@@ -84,14 +90,25 @@ var createUser = function(evt){
       password: evt.target.password.value
    }
 
-   console.log('to server:', JSON.stringify(dataForServer))
+   console.log(dataForServer)
 
-   $.post( '/login', JSON.stringify(dataForServer) ).then(function(whateversentback){
+   var reqConfig2 = {
+      url: '/login',
+      data: JSON.stringify(dataForServer),
+      headers: {
+         "Content-Type": 'application/json'
+      }
+   }
+   $.post(reqConfig2).then(function(whateversentback){
       console.log('Success !!!!')
-      mainDisplayContainer()
-   })
 
+   })
+})
+
+}
+createUser()
 }
 
 inputRouter()
+
 window.addEventListener('hashchange', inputRouter)
