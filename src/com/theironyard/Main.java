@@ -128,52 +128,52 @@ public class Main {
         Spark.externalStaticFileLocation("public");
         Spark.init();
 
-//        Spark.post(
-//                "/login",
-//                (request, response) -> {
-//                    String body = request.body();
-//                    JsonParser parser = new JsonParser();
-//                    User user = parser.parse(body,User.class);
-//                    User userFromDB = selectUser(conn,user.email);
-//                    if (userFromDB == null) {
-//                        insertUser(conn, user.email, user.password);
-//                        userFromDB = selectUser(conn,user.email);
-//                    }
-//                    else if (!user.password.equals(userFromDB.password)) {
-//                        Spark.halt(403);
-//                        return null;
-//                    }
-//                    Session session = request.session();
-//                    session.attribute("username", user.email);
-//                    JsonSerializer serializer = new JsonSerializer();
-//                    return serializer.serialize(userFromDB);
-//                }
-//        );
+        Spark.post(
+                "/login",
+                (request, response) -> {
+                    String body = request.body();
+                    JsonParser parser = new JsonParser();
+                    User user = parser.parse(body,User.class);
+                    User userFromDB = selectUser(conn,user.email);
+                    if (userFromDB == null) {
+                        insertUser(conn, user.email, user.password);
+                        userFromDB = selectUser(conn,user.email);
+                    }
+                    else if (!user.password.equals(userFromDB.password)) {
+                        Spark.halt(403);
+                        return null;
+                    }
+                    Session session = request.session();
+                    session.attribute("username", user.email);
+                    JsonSerializer serializer = new JsonSerializer();
+                    return serializer.serialize(userFromDB);
+                }
+        );
 
-//        Spark.get(
-//                "/user",
-//                (request, response) -> {
-//                    Session session = request.session();
-//                    String email = session.attribute("username");
-//                    if (email == null) {
-//                        return "";
-//                    }
-//                    User user = selectUser(conn, email);
-//                    JsonSerializer serializer = new JsonSerializer();
-//                    return serializer.serialize(user);
-//                }
-//        );
+        Spark.get(
+                "/user",
+                (request, response) -> {
+                    Session session = request.session();
+                    String email = session.attribute("username");
+                    if (email == null) {
+                        return "";
+                    }
+                    User user = selectUser(conn, email);
+                    JsonSerializer serializer = new JsonSerializer();
+                    return serializer.serialize(user);
+                }
+        );
 
-//        Spark.post(
-//                "/user",
-//                (request, response) -> {
-//                    String body = request.body();
-//                    JsonParser parser = new JsonParser();
-//                    User user = parser.parse(body, User.class);
-//                    updateUser(conn, user);
-//                    return "User has been updated.";
-//                }
-//        );
+        Spark.post(
+                "/user",
+                (request, response) -> {
+                    String body = request.body();
+                    JsonParser parser = new JsonParser();
+                    User user = parser.parse(body, User.class);
+                    updateUser(conn, user);
+                    return "User has been updated.";
+                }
+        );
 
         Spark.post(
                 "/gallery",
