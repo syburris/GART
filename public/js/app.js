@@ -79,7 +79,7 @@ var inputRouter = function(){
 
 
 var createUser = function(evt){
-      evt.preventDefault();
+    evt.preventDefault();
    // console.log("email", evt.target.email.value)
    // console.log("password", evt.target.password.value)
    var dataForServer = {
@@ -99,12 +99,12 @@ var createUser = function(evt){
    $.post(reqConfig2).then(function(serverRes){
       console.log('Success !!!!')
       window.location.hash = '';
-      mainDisplayContainer()
+      // mainDisplayContainer()
    })
-
 
 }
 }
 inputRouter()
+
 
 window.addEventListener('hashchange', inputRouter)
