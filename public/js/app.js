@@ -24,6 +24,7 @@ var inputRouter = function(){
 
       case "login":
          showAuthPage();
+         document.querySelector('#auth-form').addEventListener('submit', createUser)
          break;
 
       case "gallery-form":
@@ -37,7 +38,6 @@ var inputRouter = function(){
       case "create-form":
          addGalleryForm()
          document.querySelector('#new-gallery-form').addEventListener('submit', function(evt){
-
            evt.preventDefault()
                var createFormEl = evt.target
 
@@ -61,18 +61,17 @@ var inputRouter = function(){
             console.log("hello")
             console.log(serverRes)
        })
-         $.getJSON('/gallery').then(function(serverRes){
-          console.log(serverRes)
-          showGalleriesTable(serverRes)
     })
-})
-       break;
 
+         break;
 
+       case "show-form":
+       $.getJSON('/gallery').then(function(serverRes){
+        console.log(serverRes)
+        showGalleriesTable(serverRes)
+     })
+         break;
 
-
-      // case "show-form":
-    //    break;
          default:
 
      document.querySelector('#app-container').innerHTML = "<h1 class='bg-danger'>PAGE NOT FOUND</h1>";
@@ -80,10 +79,9 @@ var inputRouter = function(){
 
 
 var createUser = function(evt){
-   document.querySelector('#auth-form').addEventListener('submit', function(evt){
       evt.preventDefault();
-   console.log("email", evt.target.email.value)
-   console.log("password", evt.target.password.value)
+   // console.log("email", evt.target.email.value)
+   // console.log("password", evt.target.password.value)
    var dataForServer = {
       email: evt.target.email.value,
       password: evt.target.password.value
@@ -103,12 +101,9 @@ var createUser = function(evt){
       window.location.hash = '';
       mainDisplayContainer()
    })
-})
+
 
 }
-
-
-createUser()
 }
 inputRouter()
 
