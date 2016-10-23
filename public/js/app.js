@@ -35,7 +35,7 @@ var inputRouter = function(){
          break;
 
       case "create-form":
-         showGalleryPage()
+         addGalleryForm()
          document.querySelector('#new-gallery-form').addEventListener('submit', function(evt){
 
            evt.preventDefault()
@@ -60,23 +60,19 @@ var inputRouter = function(){
          $.post(reqConfig).then(function(serverRes){
             console.log("hello")
             console.log(serverRes)
-            window.location.hash = "show-form"
-
        })
-   })
-
-         break;
-
-      case "show-form":
-         showGalleriesPage();
-
          $.getJSON('/gallery').then(function(serverRes){
           console.log(serverRes)
-         showGalleriesPage(serverRes)
+          showGalleriesTable(serverRes)
+    })
+})
+       break;
 
-         })
-         break;
 
+
+
+      // case "show-form":
+    //    break;
          default:
 
      document.querySelector('#app-container').innerHTML = "<h1 class='bg-danger'>PAGE NOT FOUND</h1>";
@@ -85,6 +81,7 @@ var inputRouter = function(){
 
 var createUser = function(evt){
    document.querySelector('#auth-form').addEventListener('submit', function(evt){
+      evt.preventDefault();
    console.log("email", evt.target.email.value)
    console.log("password", evt.target.password.value)
    var dataForServer = {
@@ -101,7 +98,7 @@ var createUser = function(evt){
          "Content-Type": 'application/json'
       }
    }
-   $.post(reqConfig2).then(function(whateversentback){
+   $.post(reqConfig2).then(function(serverRes){
       console.log('Success !!!!')
       window.location.hash = '';
       mainDisplayContainer()
@@ -109,9 +106,10 @@ var createUser = function(evt){
 })
 
 }
+
+
 createUser()
 }
-
 inputRouter()
 
 window.addEventListener('hashchange', inputRouter)

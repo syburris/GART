@@ -4,7 +4,7 @@ var forEach = function(arr, cb){
    }
 }
 
-var showGalleryPage = function(){
+var addGalleryForm = function(){
    var values = [
       {attr: 'galleryName', labelName:"Gallery"},
       {attr: 'artist' , labelName: "Artist"},
@@ -12,8 +12,8 @@ var showGalleryPage = function(){
       {attr: 'time', labelName: "Time"}
    ]
 
-   var galleryStr = ''
-   galleryStr += '<div class="row galleryListBg">'
+   var galleryStr = '';
+   galleryStr += '<div class="row">'
    galleryStr +=    '<form class="col-sm-offset-3 col-sm-6 galleryList" id="new-gallery-form">'
    galleryStr += '<a href="#"><i class="fa fa-home fa-3x" aria-hidden="true"></i></a>'
    galleryStr +=     '<h2 class="">Submit New Gallery</h2>'
