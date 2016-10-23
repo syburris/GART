@@ -1,6 +1,7 @@
 var showArtist = function(artistList){
   bigList = ''
   bigList += '<div class="col-md-12 col-sm-6 text-center artistList">'
+  bigList += '<a href="#"><i class="fa fa-home fa-3x" aria-hidden="true"></i></a>'
   bigList +=       '<h1> Artist In the Know</h1>'
   bigList += '<li><img src="images/Manet.jpeg"/> Ã‰douard Manet <li>'
   bigList += '<li><img src="images/Water-Lilies-small.jpg"/> Claude Monet <li>'

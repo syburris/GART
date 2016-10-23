@@ -15,11 +15,12 @@ var showGalleryPage = function(){
    var galleryStr = ''
    galleryStr += '<div class="row galleryListBg">'
    galleryStr +=    '<form class="col-sm-offset-3 col-sm-6 galleryList" id="new-gallery-form">'
+   galleryStr += '<a href="#"><i class="fa fa-home fa-3x" aria-hidden="true"></i></a>'
    galleryStr +=     '<h2 class="">Submit New Gallery</h2>'
 
    forEach(values, function(field){
     //console.log(field)
-      galleryStr +=     ' <div class="form-group">'
+      galleryStr +=     '<div class="form-group">'
       galleryStr +=       ' <label for="' + field.column + '">' + field.labelName + '</label>'
       galleryStr +=        '<input type="text" class="form-control" name="'+field.attr+'">'
       galleryStr +=      '</div>'

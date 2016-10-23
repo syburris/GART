@@ -24,7 +24,6 @@ var inputRouter = function(){
 
       case "login":
          showAuthPage();
-
          break;
 
       case "gallery-form":
@@ -38,6 +37,7 @@ var inputRouter = function(){
       case "create-form":
          showGalleryPage()
          document.querySelector('#new-gallery-form').addEventListener('submit', function(evt){
+
            evt.preventDefault()
                var createFormEl = evt.target
 
@@ -61,16 +61,18 @@ var inputRouter = function(){
             console.log("hello")
             console.log(serverRes)
             window.location.hash = "show-form"
-            //showGalleriesPage();
-       })
 
-    })
+       })
+   })
+
          break;
 
-         case "show-form":
+      case "show-form":
+         showGalleriesPage();
+
          $.getJSON('/gallery').then(function(serverRes){
-             console.log(serverRes)
-             showGalleriesPage(serverRes);
+          console.log(serverRes)
+         showGalleriesPage(serverRes)
 
          })
          break;
@@ -82,7 +84,6 @@ var inputRouter = function(){
 
 var createUser = function(evt){
    document.querySelector('#auth-form').addEventListener('submit', function(evt){
-      evt.preventDefault()
    console.log("email", evt.target.email.value)
    console.log("password", evt.target.password.value)
    var dataForServer = {
@@ -101,7 +102,8 @@ var createUser = function(evt){
    }
    $.post(reqConfig2).then(function(whateversentback){
       console.log('Success !!!!')
-
+      window.location.hash = '';
+      mainDisplayContainer()
    })
 })
 
