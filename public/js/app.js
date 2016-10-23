@@ -76,6 +76,7 @@ var inputRouter = function(){
 
          })
          break;
+
          default:
 
      document.querySelector('#app-container').innerHTML = "<h1 class='bg-danger'>PAGE NOT FOUND</h1>";

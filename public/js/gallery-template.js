@@ -2,6 +2,7 @@ var showGallery = function (galleryList){
     bigList = '';
     bigList += '<div class="row">'
     bigList +=    '<div class="col-lg-12 col-sm-6 text-center galleryList">'
+    bigList += '<a href="#"><i class="fa fa-home fa-3x" aria-hidden="true"></i></a>'
     bigList +=       '<h1> Galleries Around the World</h1>'
     bigList +=       '<li thumbnail text-center><img src="images/download.jpeg"/> Mary Martin Gallery</li>'
     bigList +=       '<li thumbnail text-center><img src="images/download (1).jpeg"/> Atelier Gallery </li>'
