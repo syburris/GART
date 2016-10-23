@@ -60,6 +60,7 @@ var inputRouter = function(){
          $.post(reqConfig).then(function(serverRes){
             console.log("hello")
             console.log(serverRes)
+            mainDisplayContainer()
        })
     })
 
@@ -76,7 +77,7 @@ var inputRouter = function(){
 
      document.querySelector('#app-container').innerHTML = "<h1 class='bg-danger'>PAGE NOT FOUND</h1>";
 }
-
+}
 
 var createUser = function(evt){
     evt.preventDefault();
@@ -103,7 +104,7 @@ var createUser = function(evt){
    })
 
 }
-}
+
 inputRouter()
 
 
