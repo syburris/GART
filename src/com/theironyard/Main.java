@@ -187,11 +187,6 @@ public class Main {
         Spark.get(
                 "/gallery",
                 (request, response) -> {
-                    Session session = request.session();
-                    String email = session.attribute("username");
-                    if (email == null) {
-                        return "";
-                    }
                     JsonSerializer serializer = new JsonSerializer();
                     return serializer.serialize(selectGalleries(conn));
                 }
