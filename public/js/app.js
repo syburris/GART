@@ -100,7 +100,7 @@ var createUser = function(evt){
    $.post(reqConfig2).then(function(serverRes){
       console.log('Success !!!!')
       window.location.hash = '';
-      // mainDisplayContainer()
+      mainDisplayContainer()
    })
 
 }
