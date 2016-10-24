@@ -9,13 +9,13 @@ var addGalleryForm = function(){
       {attr: 'galleryName', labelName:"Gallery"},
       {attr: 'artist' , labelName: "Artist"},
       {attr: 'genre', labelName: "Genre"},
-      {attr: 'time', labelName: "Time"}
+      {attr: 'time', labelName: "Date and Time"}
    ]
 
    var galleryStr = '';
    galleryStr += '<div class="row">'
-   galleryStr +=    '<form class="col-sm-offset-3 col-sm-6 galleryList" id="new-gallery-form">'
-   galleryStr += '<a href="#"><i class="fa fa-home fa-3x" aria-hidden="true"></i></a>'
+   galleryStr +=    '<form class="col-sm-offset-3 col-sm-6 galleryListB" id="new-gallery-form">'
+   galleryStr +=   '<a href="#"><i class="fa fa-home fa-3x" aria-hidden="true"></i></a>'
    galleryStr +=     '<h2 class="">Submit New Gallery</h2>'
 
    forEach(values, function(field){
@@ -26,7 +26,7 @@ var addGalleryForm = function(){
       galleryStr +=      '</div>'
    })
 
-   galleryStr +=      '<button type="submit" class="btn btn-primary">Submit Gallery</button>'
+   galleryStr +=      '<button type="submit" class="btn btn-default ">Submit Gallery</button>'
    galleryStr +=    '</form>'
    galleryStr += '</div>'
 
