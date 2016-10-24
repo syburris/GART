@@ -19,15 +19,12 @@
          color: #FFF;
          text-shadow: 4px 4px 8px #000000;
 
-         h1{
+         h1, p{
             font-size: 60px;
             color: #FFF;
-            text-shadow: 2px 2px 4px #000000;
-            font-family: fantasy;
+
          }
-         p{
-            font-size: 30px;
-         }
+
       }
 
       .login-btn {
@@ -43,7 +40,6 @@
          font-size: 20px;
          font-weight: 300px;
 
-         text-shadow: 4px 4px 8px #000000;
       }
 
 
@@ -52,7 +48,6 @@
          color: #FFF;
          font-size: 20px;
          font-weight: 300px;
-         text-shadow: 4px 4px 8px #000000;
 
       }
 
@@ -60,7 +55,6 @@
          color: #FFF;
          font-size: 20px;
          font-weight: 300px;
-         text-shadow: 4px 4px 8px #000000;
 
       }
 
@@ -68,7 +62,6 @@
          color: #FFF;
          font-size: 20px;
          font-weight: 300px;
-         text-shadow: 4px 4px 8px #000000;
       }
 
       .galleryList{
@@ -94,7 +87,6 @@
          li{
             font-size: 20px;
 
-            text-shadow: 4px 4px 8px #000000;
             list-style-type: none;
             display: inline-block;
             height: 250px;
@@ -110,8 +102,9 @@
          }
       }
       .galleryListB{
-      background: url('/images/mainpageImg.jpeg') no-repeat fixed;
-      background-size: cover;
+         background: #E55D87; /* fallback for old browsers */
+         background: -webkit-linear-gradient(to left, #E55D87 , #5FC3E4); /* Chrome 10-25, Safari 5.1-6 */
+         background: linear-gradient(to left, #E55D87 , #5FC3E4);
       padding: 5px;
       margin-top: 5px;
       border-radius: 15px;
@@ -302,13 +295,13 @@
       }
       .imgHov8{
          width: 400px;
-         height: 217px;
+         height: 225px;
          position: relative;
          display: inline-block;
       }
       .imgText8{
          width: 275px;
-         height: 200px;
+         height: 217px;
          position:absolute;
          top:0;
          left:0;
@@ -355,12 +348,12 @@
          #new-gallery-form{
             font-size: 15px;
             color: #FFF;
-            text-shadow: 4px 4px 8px #000000;
 
          }
          #auth-form{
-            background: url('/images/images.jpeg') no-repeat fixed;
-            background-size: contain;
+            background: #E55D87; /* fallback for old browsers */
+            background: -webkit-linear-gradient(to left, #E55D87 , #5FC3E4); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to left, #E55D87 , #5FC3E4);
             color: #FFF;
             margin-top: 40px;
             padding: 10px;

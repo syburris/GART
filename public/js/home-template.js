@@ -4,9 +4,7 @@ var mainDisplayContainer = function(){
    myDisplayStr +=      '<h1 class ="appName">GART</h1>'
    myDisplayStr +=      '<p>Gallery Artist Realtime Tracker</p>'
    myDisplayStr +=      '<p><a class="btn btn-lg login-btn" href="#login" role="button">Sign Up</a></p>'
-   myDisplayStr +=     '<div class ="container text-center">'
-   myDisplayStr +=     '</div>'
-   myDisplayStr +=    '<div class="container-fluid text-center">'
+   myDisplayStr +=       '<div class="container-fluid text-center">'
    myDisplayStr +=            '<div class="row">'
    myDisplayStr +=               '<div class="col-md-12 col-md-3 ">'
    myDisplayStr +=                  '<div class=" btn gallery" data-route="gallery-form" >'
@@ -37,7 +35,6 @@ var mainDisplayContainer = function(){
    myDisplayStr +=                     '</div>'
    myDisplayStr +=                 '</div>'
    myDisplayStr +=            '</div>'
-   myDisplayStr +=         '</div>'
 
 
    document.querySelector('#app-container').innerHTML = myDisplayStr
