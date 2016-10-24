@@ -4,9 +4,10 @@ var forEach = function(arr, cb){
    }
 }
 
-var showGalleriesPage = function(galleryArr){
+var showGalleriesTable = function(galleryArr){
   var upComingShowStr = ''
       upComingShowStr += '<div class="container galleryshows">'
+      upComingShowStr += '<a href="#"><i class="fa fa-home fa-3x" aria-hidden="true"></i></a>'
       upComingShowStr +=    '<table class="table">'
       upComingShowStr +=      '<thead>'
       upComingShowStr +=       '<tr>'

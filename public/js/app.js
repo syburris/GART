@@ -24,7 +24,7 @@ var inputRouter = function(){
 
       case "login":
          showAuthPage();
-
+         document.querySelector('#auth-form').addEventListener('submit', createUser)
          break;
 
       case "gallery-form":
@@ -36,7 +36,7 @@ var inputRouter = function(){
          break;
 
       case "create-form":
-         showGalleryPage()
+         addGalleryForm()
          document.querySelector('#new-gallery-form').addEventListener('submit', function(evt){
            evt.preventDefault()
                var createFormEl = evt.target
@@ -60,31 +60,29 @@ var inputRouter = function(){
          $.post(reqConfig).then(function(serverRes){
             console.log("hello")
             console.log(serverRes)
-            window.location.hash = "show-form"
-            //showGalleriesPage();
+            mainDisplayContainer()
        })
-
     })
+
          break;
 
-         case "show-form":
-         $.getJSON('/gallery').then(function(serverRes){
-             console.log(serverRes)
-             showGalleriesPage(serverRes);
-
-         })
+       case "show-form":
+       $.getJSON('/gallery').then(function(serverRes){
+        console.log(serverRes)
+        showGalleriesTable(serverRes)
+     })
          break;
+
          default:
 
      document.querySelector('#app-container').innerHTML = "<h1 class='bg-danger'>PAGE NOT FOUND</h1>";
 }
-
+}
 
 var createUser = function(evt){
-   document.querySelector('#auth-form').addEventListener('submit', function(evt){
-      evt.preventDefault()
-   console.log("email", evt.target.email.value)
-   console.log("password", evt.target.password.value)
+    evt.preventDefault();
+   // console.log("email", evt.target.email.value)
+   // console.log("password", evt.target.password.value)
    var dataForServer = {
       email: evt.target.email.value,
       password: evt.target.password.value
@@ -99,16 +97,15 @@ var createUser = function(evt){
          "Content-Type": 'application/json'
       }
    }
-   $.post(reqConfig2).then(function(whateversentback){
+   $.post(reqConfig2).then(function(serverRes){
       console.log('Success !!!!')
-
+      window.location.hash = '';
+      // mainDisplayContainer()
    })
-})
 
-}
-createUser()
 }
 
 inputRouter()
+
 
 window.addEventListener('hashchange', inputRouter)
