@@ -371,19 +371,20 @@ img {
   display: block; }
 
 #app-container {
-  font-family: Helvetica, sans-serif; }
+  font-family: Helvetica, sans-serif;
+  background: #2ecc71; }
 
 .display-container {
-  background: url("/images/mainpageImg.jpeg") no-repeat fixed;
+  background: #2ecc71;
   background-size: cover;
   margin: 0;
   color: #FFF;
-  text-shadow: 4px 4px 8px #000000; }
+  text-shadow: 2px 2px #000000; }
   .display-container h1 {
     font-size: 60px;
     color: #FFF;
     text-shadow: 2px 2px 4px #000000;
-    font-family: fantasy; }
+    font-family: 'Raleway', sans-serif; }
   .display-container p {
     font-size: 30px; }
 
@@ -396,26 +397,26 @@ img {
   color: #FFF;
   font-size: 20px;
   font-weight: 300px;
-  text-shadow: 4px 4px 8px #000000; }
+  text-shadow: 2px 2px #000000; }
 
 .artist {
   background: url("images/Water-Lilies-small.jpg");
   color: #FFF;
   font-size: 20px;
   font-weight: 300px;
-  text-shadow: 4px 4px 8px #000000; }
+  text-shadow: 2px 2px #000000; }
 
 .createShow {
   color: #FFF;
   font-size: 20px;
   font-weight: 300px;
-  text-shadow: 4px 4px 8px #000000; }
+  text-shadow: 2px 2px #000000; }
 
 .showGalleries {
   color: #FFF;
   font-size: 20px;
   font-weight: 300px;
-  text-shadow: 4px 4px 8px #000000; }
+  text-shadow: 2px 2px #000000; }
 
 .galleryList {
   background: url("/images/mainpageImg.jpeg") no-repeat fixed;
@@ -427,7 +428,7 @@ img {
   .galleryList img {
     width: 70%; }
   .galleryList h1, .galleryList p {
-    font-family: fantasy;
+    font-family: 'Raleway', sans-serif;
     color: #fff; }
   .galleryList i {
     position: fixed;
@@ -435,7 +436,7 @@ img {
     right: 5px; }
   .galleryList li {
     font-size: 20px;
-    text-shadow: 4px 4px 8px #000000;
+    text-shadow: 2px 2px #000000;
     list-style-type: none;
     display: inline-block;
     height: 250px;
@@ -456,7 +457,7 @@ img {
   .galleryListB img {
     width: 70%; }
   .galleryListB h1, .galleryListB p {
-    font-family: fantasy;
+    font-family: 'Raleway', sans-serif;
     color: #fff; }
   .galleryListB i {
     position: fixed;
@@ -650,12 +651,8 @@ img {
   padding: 30px; }
 
 .artistList {
-  background: #E55D87;
-  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #E55D87, #5FC3E4);
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #E55D87, #5FC3E4);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #2ecc71;
+  background: #2ecc71;
   background-size: cover;
   margin: 0; }
   .artistList i {
@@ -667,8 +664,8 @@ li {
   padding: 30px;
   font-size: 20px;
   color: #FFF;
-  font-family: fantasy;
-  text-shadow: 4px 4px 8px #000000;
+  font-family: 'Raleway', sans-serif;
+  text-shadow: 2px 2px #000000;
   list-style-type: none;
   display: inline-block; }
   li img {
@@ -679,7 +676,7 @@ li {
 #new-gallery-form {
   font-size: 15px;
   color: #FFF;
-  text-shadow: 4px 4px 8px #000000; }
+  text-shadow: 2px 2px #000000; }
 
 #auth-form {
   background: url("/images/images.jpeg") no-repeat fixed;
@@ -691,12 +688,7 @@ li {
   position: relative; }
 
 .galleryshows {
-  background: #E55D87;
-  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #E55D87, #5FC3E4);
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #E55D87, #5FC3E4);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #2ecc71;
   background-size: cover;
   color: #FFF;
   margin-top: 10px; }
